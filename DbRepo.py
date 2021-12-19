@@ -22,20 +22,18 @@ class DbRepo:
     def get_all_order_by(self, table_class, column_name, direction=asc):
         return self.local_session.query(table_class).order_by(direction(column_name)).all()
 
-    #def is_true(self):
-        #return Company.salary > 70000
-
-    #def get_by_condition(self, table_class, cond):
+    def get_by_condition(self, table_class, cond):
         #return self.local_session.query(table_class).filter(Company.salary > 70000).all()
-        #return self.local_session.query(table_class).filter( cond() ).all()
-        #return self.local_session.query(table_class).filter( is_true() ).all()
+        query_result = self.local_session.query(table_class)
+        result = cond(query_result)
+        return result
+        #return cond( self.local_session.query( table_class ) )
 
     def add(self, one_row):
         # what about PK
         self.local_session.add(one_row)
         # one_row.id  = will get the next id
         self.local_session.commit()
-
 
     def add_all(self, rows_list):
         self.local_session.add_all(rows_list)

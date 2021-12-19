@@ -65,7 +65,12 @@ repo.add_all(com_ls)
 
 print(repo.get_by_ilike(User, User.username, '%moshe%'))
 print(repo.get_by_id(User, 2))
-local_session.execute('select * from Company where salary > 60000')
+#local_session.execute('select * from Company where salary > 60000')
+print('> 60,000', repo.get_by_condition(Company, lambda query: query.filter(Company.salary > 60000).all()))
+print('> 20, first', repo.get_by_condition(Company, lambda query: query.filter(Company.age > 20).first()))
+print('> 20, first', repo.get_by_condition(Company, lambda query: query.filter(Company.age > 20 \
+                                                                               and Company.salary > 60000).first()))
+
 
 
 
