@@ -1,7 +1,5 @@
 import sys
 from sqlalchemy import asc, text, desc
-from User import User
-from Company import Company
 
 class DbRepo:
     def __init__(self, local_session):
