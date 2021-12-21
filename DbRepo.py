@@ -8,7 +8,7 @@ class DbRepo:
         self.local_session = local_session
 
     def reset_auto_inc(self, table_class):
-        self.local_session.execute(f'TRUNCATE TABLE {table_class.__tablename__} RESTART IDENTITY')
+        self.local_session.execute(f'TRUNCATE TABLE {table_class.__tablename__} RESTART IDENTITY CASCADE')
 
     def get_by_id(self, table_class, id):
         return self.local_session.query(table_class).get(id)
